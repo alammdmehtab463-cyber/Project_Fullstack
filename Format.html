@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(100, 200, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 26, 46, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(100, 200, 255, 0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .header .title {
+            color: #93c5fd;
+            font-size: 1.3em;
+            position: relative;
+            z-index: 1;
+            animation: slideDown 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-out 0.4s backwards;
+        }
+
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #93c5fd;
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .contact-info a:hover::after {
+            width: 80%;
+        }
+
+        .contact-info a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.6s; }
+        .section:nth-child(2) { animation-delay: 0.8s; }
+        .section:nth-child(3) { animation-delay: 1s; }
+        .section:nth-child(4) { animation-delay: 1.2s; }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title {
+            color: #60a5fa;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3b82f6;
+            position: relative;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(96, 165, 250, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(96, 165, 250, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+            }
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #93c5fd;
+            animation: expandWidth 1s ease-out forwards;
+            animation-delay: inherit;
+        }
+
+        @keyframes expandWidth {
+            to { width: 100px; }
+        }
+
+        .job, .education-item, .skill-category {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: rgba(30, 58, 138, 0.1);
+            border-radius: 10px;
+            border-left: 3px solid #3b82f6;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job::before, .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .job:hover::before, .education-item:hover::before {
+            left: 100%;
+        }
+
+        .job:hover, .education-item:hover, .skill-category:hover {
+            background: rgba(30, 58, 138, 0.2);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .job-title {
+            color: #93c5fd;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: #60a5fa;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #94a3b8;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .description, .education-item p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        ul {
+            color: #cbd5e1;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-item:hover::before {
+            opacity: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .skill-item:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .skill-name {
+            color: #93c5fd;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(30, 58, 138, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            border-radius: 10px;
+            width: 0;
+            animation: fillBar 1.5s ease-out forwards;
+            animation-delay: 1.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShimmer 2s infinite;
+        }
+
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+
+        @keyframes fillBar {
+            to { width: var(--progress); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="resume-container">
+        <div class="header">
+            <h1>Md Mehtab Alam</h1>
+            <div class="title">UX/UI Designer & Full Stack Developer</div>
+            <div class="contact-info">
+                <a href="mailto:razwimr@gmail.com">📧 razwimr@gmail.com</a>
+                <a href="tel:+916201573591">📞 +91 6201573591</a>
+                <a href="#">🔗 linkedin.com/in/yourprofile</a>
+                <a href="https://github.com/alammdmehtab463-cyber/Project_Fullstack" target="_blank">💻 github.com/alammdmehtab463-cyber</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Professional Summary</h2>
+                <p class="description">
+                    Innovative Full Stack Developer with 5+ years of experience building scalable web applications. 
+                    Passionate about creating elegant solutions to complex problems and staying current with emerging technologies.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Projects</h2>
+                
+                <div class="job">
+                    <div class="job-title">Mobile App - Full Responsive</div>
+                    <div class="company">Personal Project</div>
+                    <div class="date">2024</div>
+                    <ul>
+                        <li>Developed a fully responsive mobile application</li>
+                        <li>Implemented modern UI/UX design principles</li>
+                        <li>Ensured cross-platform compatibility</li>
+                    </ul>
+                </div>
+
+                <div class="job">
+                    <div class="job-title">Login Page</div>
+                    <div class="company">Personal Project</div>
+                    <div class="date">2024</div>
+                    <ul>
+                        <li>Created secure user authentication interface</li>
+                        <li>Designed responsive login page with modern aesthetics</li>
+                        <li>Implemented form validation and user experience best practices</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Work Experience</h2>
+                
+                <div class="job">
+                    <div class="job-title">UX/UI Designer</div>
+                    <div class="company">Freelance / Projects</div>
+                    <div class="date">2023 - Present</div>
+                    <ul>
+                        <li>Designed user interfaces for web and mobile applications</li>
+                        <li>Created wireframes and prototypes for client projects</li>
+                        <li>Focused on user-centered design principles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                
+                <div class="education-item">
+                    <div class="job-title">Bachelor of Computer Application</div>
+                    <div class="company">Makaut University, West Bengal</div>
+                    <div class="date">2021 - 2024</div>
+                    <p>Graduated with Computer Science - GPA: 8.02/10</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Skills</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-name">UX/UI Design</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">HTML/CSS</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">JavaScript</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Responsive Design</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Figma</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Git/GitHub</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Languages</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <div class="skill-name">Hindi</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 100%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">English</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">Bengali</div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="--progress: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Hobbies & Interests</h2>
+                <div class="description">
+                    <ul>
+                        <li>Playing Cricket</li>
+                        <li>Reading Newspapers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Add hover effect to sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(5px)';
+            });
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Add bounce animation to name on hover
+        const nameElement = document.querySelector('.header h1');
+        nameElement.addEventListener('mouseenter', function() {
+            this.style.animation = 'bounce 0.5s ease';
+        });
+        nameElement.addEventListener('animationend', function() {
+            this.style.animation = '';
+        });
+
+        // Create bounce keyframe dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                25% { transform: translateY(-10px); }
+                50% { transform: translateY(0); }
+                75% { transform: translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add typing effect to title
+        const titleElement = document.querySelector('.header .title');
+        const titleText = titleElement.textContent;
+        titleElement.textContent = '';
+        let charIndex = 0;
+
+        function typeWriter() {
+            if (charIndex < titleText.length) {
+                titleElement.textContent += titleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        setTimeout(typeWriter, 800);
+    </script>
+</body>
+</html>
