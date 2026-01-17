@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan Mubarak</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            font-family: 'Georgia', serif;
+            height: 100vh;
+            position: relative;
+        }
+
+        .stars-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, transparent);
+            animation: shoot 3s linear infinite;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-500px) translateY(300px);
+                opacity: 0;
+            }
+        }
+
+        .moon-container {
+            position: absolute;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moonFloat 6s ease-in-out infinite;
+        }
+
+        .crescent {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            box-shadow: -35px 0 0 0 #ffd700, 0 0 60px rgba(255, 215, 0, 0.6);
+            position: relative;
+            animation: rotateMoon 30s linear infinite;
+        }
+
+        .crescent::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            width: 40px;
+            height: 40px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            animation: starPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes moonFloat {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+
+        @keyframes rotateMoon {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes starPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.7;
+            }
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(0.8) rotate(180deg);
+            }
+        }
+
+        .main-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .main-title {
+            font-size: 5rem;
+            background: linear-gradient(45deg, #ffd700, #fff, #ffd700, #fff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite, titleFloat 3s ease-in-out infinite;
+            font-weight: bold;
+            text-shadow: 0 0 80px rgba(255, 215, 0, 0.5);
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes titleFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #fff;
+            animation: fadeInUp 2s ease-out 0.5s backwards;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .decorative-pattern {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 3px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            animation: rotatePattern 20s linear infinite;
+        }
+
+        .decorative-pattern::before,
+        .decorative-pattern::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+        }
+
+        .decorative-pattern::before {
+            top: 15px;
+            left: 15px;
+            width: calc(100% - 30px);
+            height: calc(100% - 30px);
+        }
+
+        .decorative-pattern::after {
+            top: 30px;
+            left: 30px;
+            width: calc(100% - 60px);
+            height: calc(100% - 60px);
+        }
+
+        @keyframes rotatePattern {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .pattern-left {
+            top: 30%;
+            left: 10%;
+            animation-direction: normal;
+        }
+
+        .pattern-right {
+            top: 30%;
+            right: 10%;
+            animation-direction: reverse;
+        }
+
+        .lantern-container {
+            position: absolute;
+            animation: swingLantern 4s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .lantern {
+            width: 50px;
+            height: 70px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 50%, #ff6b6b 100%);
+            border-radius: 0 0 25px 25px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.4);
+            animation: lanternGlow 2s ease-in-out infinite;
+        }
+
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 15px;
+            background: #8b6914;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .lantern::after {
+            content: '';
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 20px;
+            background: #5c4a0f;
+        }
+
+        .lantern-tassel {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 25px;
+            background: #ffd700;
+            animation: tasselSwing 3s ease-in-out infinite;
+        }
+
+        .lantern-tassel::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: #ff6b6b;
+            border-radius: 50%;
+        }
+
+        @keyframes swingLantern {
+            0%, 100% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+        }
+
+        @keyframes lanternGlow {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(255, 107, 107, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(255, 107, 107, 1), inset 0 0 30px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        @keyframes tasselSwing {
+            0%, 100% { transform: translateX(-50%) rotate(-5deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
+        }
+
+        .mosque-container {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 250px;
+        }
+
+        .mosque-base {
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to top, rgba(255, 215, 0, 0.2), rgba(255, 215, 0, 0.05));
+            position: absolute;
+            bottom: 0;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .dome {
+            width: 120px;
+            height: 100px;
+            background: linear-gradient(to bottom, #ffd700 0%, #b8860b 100%);
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: domeGlow 3s ease-in-out infinite;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+        }
+
+        .dome::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 25px solid #ffd700;
+            animation: spinCrescent 4s linear infinite;
+        }
+
+        @keyframes domeGlow {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(255, 215, 0, 0.7);
+            }
+        }
+
+        @keyframes spinCrescent {
+            from { transform: translateX(-50%) rotate(0deg); }
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        .minaret {
+            width: 25px;
+            height: 120px;
+            background: linear-gradient(to right, #b8860b 0%, #ffd700 50%, #b8860b 100%);
+            position: absolute;
+            bottom: 80px;
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .minaret-left { left: 80px; }
+        .minaret-right { right: 80px; }
+
+        .minaret-top {
+            width: 30px;
+            height: 35px;
+            background: linear-gradient(to bottom, #ffd700 0%, #b8860b 100%);
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: minaretGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes minaretGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fff 0%, #ffd700 50%, transparent 70%);
+            border-radius: 50%;
+            animation: sparkleFloat 4s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                transform: translateY(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        .light-ray {
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(255, 215, 0, 0.8), transparent);
+            top: 15%;
+            left: 50%;
+            transform-origin: top center;
+            animation: rotateRay 10s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes rotateRay {
+            from { transform: translateX(-50%) rotate(0deg); }
+            to { transform: translateX(-50%) rotate(360deg); }
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3), transparent);
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(50px, -50px) scale(1.2);
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars-container" id="starsContainer"></div>
+
+    <!-- Light rays from moon -->
+    <div class="light-ray" style="animation-delay: 0s;"></div>
+    <div class="light-ray" style="animation-delay: -2.5s;"></div>
+    <div class="light-ray" style="animation-delay: -5s;"></div>
+    <div class="light-ray" style="animation-delay: -7.5s;"></div>
+
+    <!-- Glowing orbs -->
+    <div class="glow-orb" style="top: 20%; left: 20%;"></div>
+    <div class="glow-orb" style="top: 30%; right: 25%; animation-delay: -4s;"></div>
+
+    <div class="moon-container">
+        <div class="crescent"></div>
+    </div>
+
+    <!-- Decorative patterns -->
+    <div class="decorative-pattern pattern-left"></div>
+    <div class="decorative-pattern pattern-right"></div>
+
+    <!-- Lanterns -->
+    <div class="lantern-container" style="top: 15%; left: 15%;">
+        <div class="lantern">
+            <div class="lantern-tassel"></div>
+        </div>
+    </div>
+    <div class="lantern-container" style="top: 18%; left: 25%; animation-delay: -1s;">
+        <div class="lantern">
+            <div class="lantern-tassel"></div>
+        </div>
+    </div>
+    <div class="lantern-container" style="top: 15%; right: 15%; animation-delay: -2s;">
+        <div class="lantern">
+            <div class="lantern-tassel"></div>
+        </div>
+    </div>
+    <div class="lantern-container" style="top: 18%; right: 25%; animation-delay: -3s;">
+        <div class="lantern">
+            <div class="lantern-tassel"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="main-title">Ramadan Mubarak</h1>
+        <p class="subtitle">✨ May this holy month bring peace, joy and prosperity ✨</p>
+    </div>
+
+    <div class="mosque-container">
+        <div class="mosque-base"></div>
+        <div class="dome"></div>
+        <div class="minaret minaret-left">
+            <div class="minaret-top"></div>
+        </div>
+        <div class="minaret minaret-right">
+            <div class="minaret-top"></div>
+        </div>
+    </div>
+
+    <script>
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('starsContainer');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                const size = Math.random() * 4 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.top = Math.random() * 80 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = Math.random() * 2 + 1 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create shooting stars
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            star.style.width = Math.random() * 100 + 80 + 'px';
+            star.style.top = Math.random() * 50 + '%';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.animationDuration = Math.random() * 2 + 2 + 's';
+            document.body.appendChild(star);
+
+            setTimeout(() => star.remove(), 3000);
+        }
+
+        // Create floating sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.bottom = '0';
+            sparkle.style.animationDuration = Math.random() * 3 + 4 + 's';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 7000);
+        }
+
+        // Create colorful particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 6 + 3;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#fff'];
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.bottom = '0';
+            particle.style.boxShadow = `0 0 ${size * 3}px ${particle.style.background}`;
+            
+            const duration = Math.random() * 4 + 3;
+            particle.style.animation = `sparkleFloat ${duration}s ease-out forwards`;
+            
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), duration * 1000);
+        }
+
+        // Initialize animations
+        createStars();
+        
+        setInterval(createShootingStar, 3000);
+        setInterval(createSparkle, 400);
+        setInterval(createParticle, 300);
+
+        // Create initial burst
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createSparkle, i * 100);
+            setTimeout(createParticle, i * 150);
+        }
+    </script>
+</body>
+</html>
